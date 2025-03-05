@@ -12,7 +12,7 @@ import java.util.Stack
 
 fun main() {
     val caves = readDay12()
-//    caves.values.forEach { cave -> println("${cave.name} -> ${cave.neighbors.joinToString { it.name }}") }; println()
+    caves.values.forEach { cave -> println("${cave.name} -> ${cave.neighbors.joinToString { it.name }}") }; println()
 //    crawl(caves).forEach { println(it.joinToString(" -> ")) }
     println("Part 1: ${crawl(caves).size}")
 }
@@ -37,7 +37,7 @@ fun dfs(caves: Map<String,
     path.add(cave.name)
     if (cave != target) {
         for (neighbor in cave.neighbors) {
-            if (!path.contains(neighbor.name) || neighbor.isBig) {
+            if (!path.contains(neighbor.name) || neighbor.name.first().isUpperCase()) {
                 dfs(caves, neighbor, target, path, allPaths)
             }
         }
@@ -54,8 +54,8 @@ fun readDay12(): Map<String, Cave> {
     while (br.ready()) {
         val (name1, name2) = br.readLine().split("-")
 
-        val cave1 = caves.getOrPut(name1) { Cave(name1, name1.first().isUpperCase()) }
-        val cave2 = caves.getOrPut(name2) { Cave(name2, name2.first().isUpperCase()) }
+        val cave1 = caves.getOrPut(name1) { Cave(name1) }
+        val cave2 = caves.getOrPut(name2) { Cave(name2) }
 
         cave1.neighbors.add(cave2)
         cave2.neighbors.add(cave1)
@@ -65,7 +65,6 @@ fun readDay12(): Map<String, Cave> {
 }
 
 data class Cave(val name: String,
-                var isBig: Boolean,
                 val neighbors: MutableSet<Cave> = HashSet()
 ) {
 
