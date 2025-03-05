@@ -1,4 +1,4 @@
-package aoc2021
+package adventofcode2021
 
 import java.io.BufferedReader
 import java.io.File
@@ -28,8 +28,8 @@ fun crawl(caves: Map<String, Cave>) : Stack<List<String>> {
     return allPaths
 }
 
-fun dfs(caves: Map<String,
-        Cave>, cave: Cave,
+fun dfs(caves: Map<String, Cave>,
+        cave: Cave,
         target: Cave,
         path: ArrayList<String>,
         allPaths: Stack<List<String>>) {

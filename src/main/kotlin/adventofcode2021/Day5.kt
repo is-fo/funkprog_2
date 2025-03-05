@@ -1,4 +1,4 @@
-package aoc2021
+package adventofcode2021
 
 import java.io.BufferedReader
 import java.io.File
@@ -44,10 +44,14 @@ fun readInput() : ArrayList<Coord> {
     val br: BufferedReader = File("inputs/day5.txt").bufferedReader()
     while (br.ready()) {
         val input = br.readLine()
-        crds.add(Coord(Point(Integer.parseInt(input.substring(0, input.indexOf(','))),
+        crds.add(
+            Coord(
+                Point(Integer.parseInt(input.substring(0, input.indexOf(','))),
                     Integer.parseInt(input.substring(input.indexOf(',') + 1, input.indexOf(' ')))),
                     Point(Integer.parseInt(input.substring(input.lastIndexOf(' ') + 1, input.lastIndexOf(','))),
-                    Integer.parseInt(input.substring(input.lastIndexOf(',') + 1, input.length)))))
+                    Integer.parseInt(input.substring(input.lastIndexOf(',') + 1, input.length)))
+            )
+        )
 
     }
     return crds

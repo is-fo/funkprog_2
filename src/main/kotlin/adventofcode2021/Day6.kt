@@ -1,4 +1,4 @@
-package aoc2021
+package adventofcode2021
 
 import java.io.BufferedReader
 import java.io.File
