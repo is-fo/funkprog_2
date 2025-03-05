@@ -1,0 +1,2 @@
+Alla Advent of Code-uppgifter är skrivna och initialt versionshanterade i ett annat (privat) GitHub-repo.
+Därför finns ingen git-historik i det här projektet men på begäran kan det tas fram!
