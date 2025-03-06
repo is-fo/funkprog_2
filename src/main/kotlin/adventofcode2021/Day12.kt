@@ -14,7 +14,7 @@ fun main() {
     val caves = readDay12()
 //    caves.values.forEach { cave -> println("${cave.name} -> ${cave.neighbors.joinToString { it.name }}") }; println()
 //    crawl(caves).forEach { println(it.joinToString(" -> ")) }; println()
-    println("Part 1: ${crawl(caves).size}")
+    println("Part 2: ${crawl(caves).size}")
 }
 
 fun crawl(caves: Map<String, Cave>) : Stack<List<String>> {
