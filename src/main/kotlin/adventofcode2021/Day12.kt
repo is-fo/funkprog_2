@@ -12,8 +12,8 @@ import java.util.Stack
 
 fun main() {
     val caves = readDay12()
-    caves.values.forEach { cave -> println("${cave.name} -> ${cave.neighbors.joinToString { it.name }}") }; println()
-//    crawl(caves).forEach { println(it.joinToString(" -> ")) }
+//    caves.values.forEach { cave -> println("${cave.name} -> ${cave.neighbors.joinToString { it.name }}") }; println()
+//    crawl(caves).forEach { println(it.joinToString(" -> ")) }; println()
     println("Part 1: ${crawl(caves).size}")
 }
 
@@ -22,7 +22,7 @@ fun crawl(caves: Map<String, Cave>) : Stack<List<String>> {
     dfs(caves,
         caves["start"]!!,
         caves["end"]!!,
-        ArrayList(),
+        Stack(),
         allPaths
         )
     return allPaths
@@ -31,20 +31,30 @@ fun crawl(caves: Map<String, Cave>) : Stack<List<String>> {
 fun dfs(caves: Map<String, Cave>,
         cave: Cave,
         target: Cave,
-        path: ArrayList<String>,
+        path: Stack<String>,
         allPaths: Stack<List<String>>) {
 
-    path.add(cave.name)
+    path.push(cave.name)
+
+    val smallCaves = path.filter { it != "start" && it != "end" && it.all { ch -> ch.isLowerCase() } }
+    val visitedTwice = smallCaves
+        .groupingBy { it }
+        .eachCount()
+        .values
+        .any { it > 1 }
+//    if (cave.name == target.name) {
+//        println("$visitedTwice --> $path")
+//    }
     if (cave != target) {
         for (neighbor in cave.neighbors) {
-            if (!path.contains(neighbor.name) || neighbor.name.first().isUpperCase()) {
+            if (neighbor.name != "start" && (!path.contains(neighbor.name) || !visitedTwice || neighbor.name.all { it.isUpperCase() })) {
                 dfs(caves, neighbor, target, path, allPaths)
             }
         }
     } else {
         allPaths.push(path.toList())
     }
-    path.removeLast()
+    path.pop()
 }
 
 fun readDay12(): Map<String, Cave> {
